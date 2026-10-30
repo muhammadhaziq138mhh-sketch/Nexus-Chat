@@ -1,0 +1,1286 @@
+# ULTIMATE MASTER PROMPT
+## PROJECT: PREMIUM SOCIAL NETWORKING & REAL-TIME MESSAGING PLATFORM
+
+### 1. YOUR ROLE AND RESPONSIBILITIES
+
+Act as a senior full-stack software architect, React and TypeScript developer, Firebase specialist, backend engineer, UI/UX designer, database architect, cybersecurity engineer, and QA automation engineer with 10+ years of professional-level experience.
+
+Your responsibility is to design, develop, test, and deliver a complete, professional-grade social networking and real-time messaging application.
+
+The application should combine the best user experiences of WhatsApp, Telegram, Facebook, and Instagram while maintaining its own original identity, branding, architecture, and user experience.
+
+**Important:** Build a real, functional application, not a static UI prototype or a collection of nonfunctional screens.
+
+Every major feature must connect to its actual backend service and persist data correctly.
+
+---
+
+### 2. PRIMARY PROJECT OBJECTIVES
+
+Develop a premium social networking ecosystem that includes:
+
+- User registration and authentication.
+- User profiles and account management.
+- Social media news feed.
+- Posts, images, and videos.
+- Likes, reactions, comments, and sharing.
+- Friend requests and follower systems.
+- Real-time private messaging.
+- Real-time group conversations.
+- Voice messages.
+- Audio and video calling.
+- Stories and status updates.
+- Notifications.
+- User search and discovery.
+- Groups and communities.
+- Privacy and security controls.
+- Premium user experience.
+- Separate secure admin dashboard.
+- Subscription architecture for future monetization.
+- Progressive Web App (PWA) support.
+
+The application must be responsive and usable on desktop, laptops, tablets, Android smartphones, iPhones, and mobile browsers.
+
+---
+
+### 3. TECHNOLOGY STACK AND ARCHITECTURE
+
+First inspect the available Google AI Studio development environment and its supported integrations.
+
+Use the following preferred technology stack:
+
+**Frontend**
+- React.
+- TypeScript.
+- Tailwind CSS.
+- Lucide React icons.
+- React Router.
+- Reusable component architecture.
+- Responsive CSS.
+- Form validation using Zod or an equivalent library.
+
+**Backend**
+- Node.js server-side runtime where supported.
+- Secure server-side API endpoints.
+- Firebase Cloud Functions or an equivalent trusted backend.
+- Server-side input validation.
+- Role-based authorization.
+- Secure real-time event handling.
+
+**Firebase**
+- Firebase Authentication.
+- Cloud Firestore.
+- Firebase Storage.
+- Firebase Cloud Messaging.
+- Firebase App Check where supported.
+- Firebase Security Rules.
+- Cloud Functions.
+
+**Additional technologies**
+- WebRTC for audio and video calls.
+- Service workers for PWA functionality.
+- Gemini API for optional AI functionality, accessed only through a secure backend.
+
+Use Google AI Studio's Firebase integration when available.
+
+Do not introduce unnecessary frameworks or incompatible technologies.
+
+Do not expose private credentials, service account keys, privileged database access, or secret API keys in frontend code.
+
+If an external service requires configuration, document the exact setup requirements instead of simulating its functionality.
+
+---
+
+### 4. BRANDING AND PREMIUM UI/UX DESIGN
+
+Create an original, premium, modern SaaS-quality design.
+
+**Design direction**
+- Elegant and professional.
+- Minimal and clean interface.
+- Premium light and dark modes.
+- Smooth transitions and subtle animations.
+- Beautiful message bubbles.
+- Rounded cards and components.
+- Consistent typography.
+- Professional iconography.
+- Carefully balanced spacing.
+- Accessible color contrast.
+- Responsive navigation.
+- High-quality loading and empty states.
+
+**Suggested color palette**
+
+- Primary: `#6C5CE7`
+- Background: `#F3F4F6`
+- Dark Background: `#111827`
+- Accent: `#19B89A`
+- White: `#FFFFFF`
+- Secondary text: muted neutral colors.
+
+Create a reusable design system containing:
+
+- Color tokens.
+- Typography scale.
+- Spacing system.
+- Border-radius tokens.
+- Shadow styles.
+- Buttons.
+- Inputs.
+- Dropdowns.
+- Modals.
+- Drawers.
+- Cards.
+- Avatars.
+- Badges.
+- Toast notifications.
+- Skeleton loaders.
+- Navigation components.
+- Message components.
+
+**Desktop layout**
+
+Use a responsive three-column layout:
+
+1. Left navigation sidebar.
+2. Central content area.
+3. Right information and recommendations sidebar.
+
+**Mobile layout**
+
+- Compact bottom navigation.
+- Full-screen chat pages.
+- Mobile-friendly menus.
+- Touch-friendly controls.
+- Responsive media previews.
+- Safe-area support.
+- Proper mobile keyboard handling.
+
+Do not overload the interface with unnecessary gradients, animations, or decorative elements.
+
+---
+
+### 5. AUTHENTICATION AND ACCOUNT MANAGEMENT
+
+Implement real Firebase Authentication.
+
+Required functionality:
+
+- User registration.
+- Email and password login.
+- Google sign-in.
+- Logout.
+- Email verification.
+- Password reset.
+- Protected routes.
+- Authentication persistence.
+- Session management.
+- Account recovery.
+- Profile creation after successful registration.
+- Profile editing.
+- Profile image upload.
+- Display name.
+- Unique username.
+- Bio and personal information.
+- Account deletion.
+
+**Critical requirement:**
+
+Every successfully registered Firebase Authentication user must automatically receive a corresponding Firestore user profile linked to their authentication UID.
+
+User profile creation must be reliable and handle failures.
+
+Do not allow the interface to behave as though registration succeeded if the profile creation process failed.
+
+---
+
+### 6. SOCIAL NETWORKING MODULE
+
+Create a fully functional social networking experience.
+
+#### A. Home Feed
+
+- Personalized news feed.
+- Latest posts.
+- Following feed.
+- Recommended content.
+- Infinite scrolling or pagination.
+- Refresh feed.
+- Post visibility settings.
+- Loading skeletons.
+- Empty states.
+
+#### B. Create Posts
+
+Support:
+
+- Text posts.
+- Image posts.
+- Video posts.
+- Multiple image uploads.
+- Captions.
+- Hashtags.
+- User mentions.
+- Post privacy selection.
+- Location tagging where permission is granted.
+- Draft posts.
+- Post editing.
+- Post deletion.
+
+#### C. Post Engagement
+
+- Like and unlike.
+- Multiple reaction types.
+- Comments.
+- Reply to comments.
+- Edit own comments.
+- Delete own comments.
+- Share posts.
+- Save posts.
+- Report posts.
+- View post engagement.
+
+Prevent duplicate reactions and enforce ownership rules.
+
+#### D. User Profiles
+
+Each profile should contain:
+
+- Profile photo.
+- Cover photo.
+- Display name.
+- Unique username.
+- Bio.
+- Followers count.
+- Following count.
+- Posts count.
+- User posts.
+- Saved posts where private to the owner.
+- Follow/unfollow button.
+- Friend request button where applicable.
+- Message button.
+- Profile privacy controls.
+
+#### E. Friend Requests and Following
+
+- Send friend requests.
+- Accept requests.
+- Reject requests.
+- Cancel pending requests.
+- Remove friends.
+- Follow and unfollow users.
+- Followers list.
+- Following list.
+- Mutual connections.
+- Block users.
+
+Enforce relationship permissions on the backend.
+
+#### F. Explore and Discovery
+
+- Search users.
+- Search posts.
+- Trending hashtags.
+- Popular content.
+- Recommended accounts.
+- Explore categories.
+- Search filters.
+
+Do not display hardcoded trending data as real platform statistics.
+
+---
+
+### 7. REAL-TIME MESSAGING SYSTEM
+
+Implement a professional real-time messaging system using Cloud Firestore and supported real-time listeners.
+
+#### A. Private Conversations
+
+- One-to-one conversations.
+- Real-time text messages.
+- Message history.
+- Conversation creation.
+- Message replies.
+- Message editing.
+- Message deletion.
+- Emoji reactions.
+- Message forwarding.
+- Message copying.
+- Message pinning.
+- Message search.
+- Conversation search.
+- Archive conversations.
+- Mute conversations.
+- Unread message counts.
+- Draft message persistence.
+- Date separators.
+- Scroll-to-latest button.
+
+#### B. Message Status
+
+Implement:
+
+- Sending.
+- Sent.
+- Delivered.
+- Read.
+
+Only update delivery and read statuses after actual acknowledgement from the relevant recipient device.
+
+Also support:
+
+- Typing indicators.
+- Online presence.
+- Last-seen information.
+- Unread dividers.
+- Message timestamps.
+- Reply previews.
+- Reconnection and synchronization.
+
+Apply privacy settings to online status and read receipts.
+
+#### C. Voice Messages
+
+Implement a genuinely functional voice-message system.
+
+Requirements:
+
+- Microphone permission handling.
+- Start recording.
+- Stop recording.
+- Pause and resume where supported.
+- Cancel recording.
+- Recording duration.
+- Playback preview before sending.
+- Play and pause controls.
+- Audio progress indicator.
+- Seek functionality.
+- Voice-note duration display.
+- Upload progress.
+- Retry failed uploads.
+- Actual audio file storage.
+- Real-time delivery to recipients.
+- Playback after page refresh.
+
+Use the browser's supported MediaRecorder API and detect supported recording formats.
+
+Do not assume that every browser supports the same audio MIME type.
+
+Stop microphone tracks when recording ends, is cancelled, or the component is removed.
+
+Handle denied permissions, unsupported browsers, empty recordings, upload errors, interrupted recordings, and playback failures.
+
+**Critical acceptance test:** Two separate authenticated users must be able to exchange voice messages, play the received audio, refresh the application, and play the same stored audio again.
+
+Never display a fake voice-message interface or simulate a successful upload.
+
+#### D. Audio and Video Attachments
+
+Support:
+
+- Image sharing.
+- Video sharing.
+- Audio files.
+- PDF documents.
+- Word documents.
+- Excel documents.
+- Other approved file types.
+
+Display:
+
+- File name.
+- File type.
+- File size.
+- Upload progress.
+- Preview where supported.
+- Download option.
+- Retry option.
+
+Validate MIME type, file size, filename, and user authorization.
+
+Store attachments in private Firebase Storage locations and protect access through appropriate security rules.
+
+#### E. Message Deletion
+
+Provide two distinct actions:
+
+**Delete for me**
+- Remove the message from the current user's view.
+- Do not delete the other participants' copies.
+
+**Delete for everyone**
+- Remove or mark the message as deleted for all participants.
+- Verify the sender's authorization.
+- Apply a documented deletion time or permission policy if required.
+
+Ensure deletion synchronizes across connected clients.
+
+Handle message attachments and storage cleanup safely.
+
+#### F. Group Messaging
+
+- Create group conversations.
+- Add members.
+- Remove members.
+- Group name and image.
+- Group description.
+- Group administrators.
+- Member roles.
+- Group permissions.
+- Group messages.
+- Member invitations.
+- Group invite links where supported.
+- Mentions.
+- Group notifications.
+- Pinned messages.
+- Group search.
+- Leave group.
+- Mute and archive group.
+
+Enforce group membership and administrative permissions on the backend.
+
+---
+
+### 8. AUDIO AND VIDEO CALLING
+
+Implement actual WebRTC calling functionality.
+
+#### Audio Calling
+
+- Start voice calls.
+- Incoming call screen.
+- Accept call.
+- Decline call.
+- Cancel outgoing call.
+- End call.
+- Mute/unmute microphone.
+- Call duration.
+- Connection status.
+- Call history.
+- Missed calls.
+
+#### Video Calling
+
+- Start video calls.
+- Incoming video call screen.
+- Accept and decline.
+- Enable/disable camera.
+- Mute/unmute microphone.
+- Switch front and rear cameras where supported.
+- Local video preview.
+- Remote video stream.
+- Call duration.
+- End call.
+- Connection status.
+- Missed-call records.
+
+#### Technical Requirements
+
+- WebRTC peer connections.
+- Authenticated signaling.
+- SDP offer and answer exchange.
+- ICE candidate exchange.
+- STUN configuration.
+- TURN server configuration for production reliability.
+- Microphone and camera permission handling.
+- Network interruption handling.
+- Cleanup of media streams and peer connections.
+
+Store call metadata and history securely.
+
+Do not record calls without explicit consent and a separately implemented recording feature.
+
+Do not display a fake call screen or mark a call successful without a real media connection.
+
+Test calls using two separate authenticated accounts and different browsers/devices.
+
+---
+
+### 9. STORIES AND STATUS UPDATES
+
+Implement a story feature with:
+
+- Text stories.
+- Image stories.
+- Video stories.
+- Story creation.
+- Story viewing.
+- Story reactions.
+- Story replies.
+- Story audience selection.
+- Viewer lists.
+- 24-hour expiration.
+- Story privacy.
+- Mute selected users' stories.
+- Report inappropriate stories.
+
+Use backend timestamps to determine expiration.
+
+Expired stories should no longer appear in active story feeds, and scheduled cleanup should remove expired media when appropriate.
+
+---
+
+### 10. NOTIFICATION SYSTEM
+
+Implement real notifications for:
+
+- New messages.
+- Friend requests.
+- Accepted friend requests.
+- Likes.
+- Comments.
+- Replies.
+- Mentions.
+- Group invitations.
+- Group activity.
+- Story interactions.
+- Admin announcements.
+
+Include:
+
+- In-app notification center.
+- Read/unread status.
+- Mark as read.
+- Mark all as read.
+- Notification preferences.
+- Push notifications where supported.
+- Unread badge counts.
+- Muted conversations.
+
+Browser and mobile push notifications must request permission and use properly configured Firebase Cloud Messaging infrastructure.
+
+Do not claim push notifications are active without the required configuration and testing.
+
+---
+
+### 11. USER SETTINGS AND PRIVACY
+
+Create a complete settings section.
+
+#### Account Settings
+
+- Edit account information.
+- Change profile details.
+- Change password through the supported authentication flow.
+- Manage email verification.
+- Manage connected sessions.
+- Account deletion.
+
+#### Privacy Settings
+
+- Profile visibility.
+- Profile photo visibility.
+- Last-seen visibility.
+- Online-status visibility.
+- Read-receipt preferences.
+- Story audience.
+- Who can send friend requests.
+- Who can message the user.
+- Group invitation permissions.
+- Blocked users.
+
+#### Appearance Settings
+
+- Light mode.
+- Dark mode.
+- System theme.
+- Accent color options.
+- Font-size settings.
+- Chat appearance.
+- Responsive layout preferences.
+
+#### Security Settings
+
+- Session management.
+- Logout from other sessions where supported.
+- Security notifications.
+- Account recovery.
+- Privacy and security information.
+
+Do not claim end-to-end encryption unless a vetted cryptographic protocol has actually been implemented and verified.
+
+Use HTTPS/TLS in production and clearly explain the application's actual encryption model.
+
+---
+
+### 12. ADMIN PANEL
+
+Build a separate, protected administration dashboard.
+
+#### Dashboard Overview
+
+- Total registered users.
+- Active users.
+- Online users.
+- New registrations.
+- Total posts.
+- Total conversations.
+- Message volume.
+- Reported content.
+- Pending moderation tasks.
+- Platform health indicators.
+
+All statistics must come from actual database queries or trusted analytics sources.
+
+Do not hardcode fake dashboard numbers.
+
+#### User Management
+
+- Search users.
+- View permitted user information.
+- User verification.
+- Suspend accounts.
+- Restore accounts.
+- Manage account restrictions.
+- Review reports.
+- Manage user roles.
+
+#### Content Moderation
+
+- Review posts.
+- Review comments.
+- Review reports.
+- Remove violating content.
+- Review reported users.
+- Record moderation decisions.
+- Track moderation history.
+
+#### Group and Platform Management
+
+- Group management.
+- Community moderation.
+- Notification management.
+- Platform settings.
+- Subscription management.
+- Admin roles.
+- Permission management.
+- Audit logs.
+
+#### Admin Security
+
+Implement strict role-based access control.
+
+Admin roles must be assigned and verified through trusted server-side authorization.
+
+Never grant administrator access because a user changes a frontend value, URL, or Firestore field that they are allowed to edit.
+
+Use least-privilege permissions and log sensitive administrative actions.
+
+Do not expose private conversations to administrators by default.
+
+---
+
+### 13. FIRESTORE DATABASE ARCHITECTURE
+
+Create a structured and scalable Firestore schema.
+
+Recommended collections:
+
+- users
+- userProfiles
+- userSettings
+- friendships
+- friendRequests
+- followers
+- posts
+- comments
+- reactions
+- savedPosts
+- hashtags
+- conversations
+- conversationMembers
+- messages
+- messageReceipts
+- messageReactions
+- messageAttachments
+- groups
+- groupMembers
+- groupInvites
+- stories
+- storyViews
+- notifications
+- reports
+- moderationActions
+- adminUsers
+- adminActivityLogs
+- subscriptions
+- devices
+- pushTokens
+- calls
+- callParticipants
+
+For each collection, define:
+
+- Document structure.
+- Field types.
+- Unique identifiers.
+- Ownership.
+- Access permissions.
+- Created and updated timestamps.
+- Required indexes.
+- Pagination strategy.
+- Retention rules.
+
+Use server timestamps where appropriate.
+
+Avoid placing unlimited messages, comments, or followers inside a single Firestore document.
+
+Use subcollections or appropriate data structures for scalable records.
+
+Create and document all required Firestore composite indexes.
+
+Implement strict Firestore Security Rules.
+
+Implement secure Firebase Storage Rules.
+
+Users must only access data they are authorized to access.
+
+---
+
+### 14. DATA PERSISTENCE AND ACCOUNT DELETION
+
+All important application data must persist in Firebase.
+
+Do not use browser localStorage as the primary database.
+
+Local storage may only be used for non-sensitive preferences, temporary drafts, or permitted client-side caching.
+
+Implement a complete account deletion workflow.
+
+When a consumer requests account deletion:
+
+1. Require clear confirmation.
+2. Explain the data deletion and retention policy.
+3. Disable access promptly.
+4. Revoke or invalidate applicable sessions and authentication tokens.
+5. Delete or anonymize the user's profile and personal information according to the documented policy.
+6. Remove or anonymize owned content where appropriate.
+7. Clean up owned media files.
+8. Remove relevant push tokens and personal settings.
+9. Process related database cleanup safely.
+10. Provide an accurate deletion status.
+
+Do not accidentally delete shared messages, group records, or content belonging to other users.
+
+Define what happens to messages already delivered to recipients.
+
+Make cleanup operations idempotent and resilient to failures.
+
+Use trusted backend processes for privileged deletion operations.
+
+Do not promise immediate deletion from backups unless the infrastructure actually supports it.
+
+---
+
+### 15. SECURITY AND ABUSE PREVENTION
+
+Implement:
+
+- Firebase Authentication checks.
+- Server-side authorization.
+- Firestore Security Rules.
+- Storage Security Rules.
+- Input validation.
+- Rate limiting.
+- Abuse prevention.
+- Secure file uploads.
+- MIME validation.
+- File-size restrictions.
+- Protection against unauthorized document access.
+- Protection against privilege escalation.
+- Secure session handling.
+- User blocking.
+- User reporting.
+- Content moderation.
+- Safe error handling.
+- Audit logging for privileged operations.
+
+Never trust frontend-only validation.
+
+Never expose private API keys or service credentials.
+
+Never display raw internal errors or sensitive server information to users.
+
+---
+
+### 16. SEARCH AND DISCOVERY
+
+Implement global search for:
+
+- Users.
+- Usernames.
+- Posts.
+- Hashtags.
+- Groups.
+- Communities.
+- Messages, subject to the application's privacy architecture.
+
+Include:
+
+- Search suggestions.
+- Debounced search.
+- Filters.
+- Pagination.
+- Loading states.
+- Empty states.
+- Error handling.
+- Search result highlighting.
+
+Ensure search results respect privacy settings, blocks, and authorization.
+
+For usernames, establish one canonical normalized username field and use consistent indexing and matching logic.
+
+---
+
+### 17. PROGRESSIVE WEB APP
+
+Make the application installable as a PWA where supported.
+
+Implement:
+
+- Web app manifest.
+- Application icons.
+- Service worker.
+- Install prompt.
+- Responsive standalone display.
+- Offline fallback.
+- Safe caching strategy.
+- Update handling.
+
+Do not cache private messages or sensitive personal data in an insecure manner.
+
+Clearly distinguish offline UI support from actual offline message delivery.
+
+---
+
+### 18. OPTIONAL AI FEATURES
+
+Integrate Gemini-powered features only when properly configured.
+
+Possible features:
+
+- AI writing assistant.
+- Suggested replies.
+- Message translation.
+- Post caption suggestions.
+- Content summarization.
+- Hashtag suggestions.
+- User-requested conversation summaries.
+
+Requirements:
+
+- Use a secure backend.
+- Never expose the Gemini API key in client-side code.
+- Ask for appropriate user consent before sending private content to an AI service.
+- Clearly identify AI-generated suggestions.
+- Require user approval before sending generated messages or publishing generated content.
+- Implement usage limits and error handling.
+
+---
+
+### 19. SUBSCRIPTION ARCHITECTURE
+
+Prepare a scalable subscription architecture for future premium features.
+
+Potential features:
+
+- Free account.
+- Premium account.
+- Advanced customization.
+- Additional storage.
+- Premium themes.
+- Enhanced account features.
+
+Implement real subscription payments only when a payment provider is configured.
+
+Do not show fake payment success or activate paid entitlements without server-side payment verification.
+
+---
+
+### 20. RESPONSIVE DESIGN REQUIREMENTS
+
+Follow a mobile-first approach.
+
+Test the application at these viewport widths:
+
+- 320px.
+- 375px.
+- 390px.
+- 430px.
+- 768px.
+- 1024px.
+- 1440px.
+- 1920px.
+
+Verify:
+
+- No horizontal overflow.
+- Navigation works.
+- Forms remain usable.
+- Chat interface fits mobile screens.
+- Message composer works with the mobile keyboard.
+- Media uploads work.
+- Modals and drawers fit the screen.
+- Admin dashboard remains usable.
+- Text remains readable.
+- Touch controls have adequate size.
+
+Support accessibility through semantic HTML, keyboard navigation, visible focus states, screen-reader labels, and reduced-motion preferences.
+
+---
+
+### 21. PROJECT STRUCTURE
+
+Use a clean, modular architecture.
+
+Recommended organization:
+
+- `src/components`
+- `src/pages`
+- `src/layouts`
+- `src/hooks`
+- `src/context`
+- `src/services`
+- `src/firebase`
+- `src/auth`
+- `src/types`
+- `src/utils`
+- `src/routes`
+- `src/features/social`
+- `src/features/messaging`
+- `src/features/groups`
+- `src/features/stories`
+- `src/features/notifications`
+- `src/features/calls`
+- `src/features/settings`
+- `src/features/admin`
+- `src/styles`
+
+Separate frontend presentation, business logic, Firebase operations, and trusted backend functions.
+
+Use reusable components and strong TypeScript types.
+
+Avoid oversized components, duplicated code, and unnecessary dependencies.
+
+---
+
+### 22. FUNCTIONALITY RULES — NON-NEGOTIABLE
+
+Every visible button must perform its intended action.
+
+Every form must validate its inputs.
+
+Every important operation must have:
+
+- Loading state.
+- Success state.
+- Error state.
+- Empty state where applicable.
+- Permission checks.
+
+All user-generated data must persist correctly.
+
+Real-time messaging must synchronize across multiple authenticated users.
+
+Users must not access conversations, posts, private files, or administrative operations without authorization.
+
+Do not use fake users, fake messages, hardcoded statistics, simulated calls, or mock data as substitutes for real functionality.
+
+Development seed data may be used only when clearly labeled.
+
+Do not display a success message if an operation fails.
+
+Do not leave placeholder buttons in the production interface.
+
+If a feature cannot be completed, identify it as pending and explain the exact reason.
+
+---
+
+### 23. DEVELOPMENT AND IMPLEMENTATION STRATEGY
+
+Build the application in manageable, testable phases.
+
+**PHASE 1 — PROJECT FOUNDATION**
+- Inspect the Google AI Studio environment.
+- Inspect existing code and project structure.
+- Identify supported Firebase integrations.
+- Set up the application architecture.
+- Create the design system.
+- Build responsive layouts.
+- Configure routing.
+- Configure environment variables.
+
+**PHASE 2 — AUTHENTICATION**
+- Firebase Authentication.
+- Registration and login.
+- Google sign-in.
+- Password recovery.
+- Protected routes.
+- User profile creation.
+- Profile management.
+
+**PHASE 3 — SOCIAL NETWORK**
+- Home feed.
+- Create posts.
+- Image and video uploads.
+- Likes and reactions.
+- Comments and replies.
+- User profiles.
+- Friend requests.
+- Followers and following.
+- Search and explore.
+
+**PHASE 4 — PRIVATE MESSAGING**
+- Conversation creation.
+- Real-time text messages.
+- Message history.
+- Message editing and deletion.
+- Read receipts.
+- Typing indicators.
+- Online status.
+- Reactions and replies.
+
+**PHASE 5 — MEDIA AND GROUPS**
+- Voice messages.
+- Image and video sharing.
+- Document uploads.
+- Group creation.
+- Group permissions.
+- Group messaging.
+- Media gallery.
+
+**PHASE 6 — CALLING**
+- WebRTC setup.
+- Audio calling.
+- Video calling.
+- Authenticated signaling.
+- STUN/TURN configuration.
+- Call history.
+- Device and permission testing.
+
+**PHASE 7 — STORIES AND NOTIFICATIONS**
+- Story creation.
+- Story viewing.
+- Story expiration.
+- Reactions.
+- Notification center.
+- Push notification configuration.
+
+**PHASE 8 — ADMIN AND SECURITY**
+- Admin dashboard.
+- Role-based permissions.
+- User moderation.
+- Content reports.
+- Audit logs.
+- Security rules.
+- Account deletion.
+
+**PHASE 9 — ADVANCED FEATURES**
+- PWA installation.
+- Dark and light themes.
+- AI assistant.
+- Advanced search.
+- Subscription architecture.
+- Performance optimization.
+
+**PHASE 10 — FINAL QA AND DEPLOYMENT**
+- TypeScript checks.
+- Build verification.
+- Browser testing.
+- Firebase testing.
+- Security testing.
+- Responsive testing.
+- Real-time synchronization testing.
+- Deployment documentation.
+
+Prioritize a working end-to-end feature over creating many incomplete screens.
+
+---
+
+### 24. QUALITY ASSURANCE AND TESTING
+
+Test every major workflow.
+
+**Authentication tests**
+- Register a new user.
+- Verify email.
+- Log in.
+- Log out.
+- Reset password.
+- Confirm protected routes.
+
+**Social network tests**
+- Create a post.
+- Upload an image.
+- Like and unlike a post.
+- Comment and reply.
+- Edit and delete owned content.
+- Send and accept friend requests.
+- Follow and unfollow users.
+
+**Messaging tests**
+- Register two separate accounts.
+- Search for one account from the other.
+- Start a conversation.
+- Send and receive messages.
+- Verify real-time synchronization.
+- Refresh both clients.
+- Verify message persistence.
+- Test editing and deletion.
+- Test message receipts.
+- Test voice-note recording and playback.
+- Test document upload and download.
+
+**Calling tests**
+- Start an audio call between two accounts.
+- Accept and decline calls.
+- Verify microphone controls.
+- Start a video call.
+- Verify camera controls.
+- Test connection failures.
+- Verify call cleanup.
+
+**Security tests**
+- Attempt unauthorized conversation access.
+- Attempt unauthorized media access.
+- Attempt privilege escalation.
+- Test Firestore rules.
+- Test Storage rules.
+- Verify admin permissions.
+
+**Deletion tests**
+- Delete a message for one user.
+- Delete a message for everyone.
+- Delete an attachment.
+- Delete a test account.
+- Verify expected cleanup.
+- Test failed and repeated cleanup requests.
+
+**Responsive tests**
+- Test all required viewport widths.
+- Check navigation.
+- Check forms.
+- Check social feed.
+- Check messaging.
+- Check calls.
+- Check admin dashboard.
+
+Fix discovered errors before moving to the next phase.
+
+---
+
+### 25. FINAL DELIVERABLES
+
+Provide:
+
+1. Complete source code.
+2. Working responsive frontend.
+3. Functional Firebase integration.
+4. Authentication implementation.
+5. Firestore database architecture.
+6. Firestore indexes.
+7. Firestore Security Rules.
+8. Firebase Storage Rules.
+9. Secure backend functions.
+10. Real-time messaging implementation.
+11. Voice messaging implementation.
+12. WebRTC calling implementation or documented infrastructure blockers.
+13. Admin dashboard.
+14. PWA configuration.
+15. Automated tests where supported.
+16. Environment variable example file without secrets.
+17. Firebase setup instructions.
+18. Local development instructions.
+19. Deployment instructions.
+20. Production-readiness checklist.
+21. Known limitations and pending features.
+
+---
+
+### 26. STRICT ACCEPTANCE CRITERIA
+
+The application must not be declared complete until the following critical workflows have been tested:
+
+- A new user can register and log in.
+- Each registered user receives a persistent profile.
+- Users can discover other registered users.
+- Users can create and interact with social posts.
+- Users can send and receive real-time private messages.
+- Messages remain available after refresh.
+- Users cannot access unauthorized conversations.
+- Users can send and receive actual voice messages.
+- Recipients can play stored voice messages after refresh.
+- Users can share and download authorized documents.
+- Message deletion follows the selected deletion behavior.
+- Two separate accounts can establish actual audio calls.
+- Two separate accounts can establish actual video calls.
+- Group permissions are enforced.
+- Notifications behave according to their configuration.
+- Account deletion follows the documented retention policy.
+- Admin permissions are verified server-side.
+- Responsive layouts work on desktop and mobile.
+- No private credentials are exposed in client code.
+- No critical buttons are nonfunctional.
+- No fake success messages or misleading feature claims remain.
+
+---
+
+### 27. HOW TO HANDLE EXISTING PROJECTS
+
+If an existing project or application is already available:
+
+1. Inspect its current source code and architecture.
+2. Identify existing working functionality.
+3. Identify broken, incomplete, or missing functionality.
+4. Preserve the existing project identity, branding, and design system unless explicitly instructed otherwise.
+5. Do not delete working features.
+6. Do not unnecessarily replace the existing architecture.
+7. Make focused changes and improvements.
+8. Fix existing errors before adding more features.
+9. Test existing functionality after every significant update.
+10. Maintain backward compatibility with existing database records wherever possible.
+
+Do not assume a feature works just because a button or screen exists.
+
+---
+
+### 28. FINAL EXECUTION INSTRUCTIONS
+
+Start by inspecting the available development environment and the existing project.
+
+Then:
+
+1. Establish the application foundation.
+2. Configure Firebase correctly.
+3. Build the premium responsive interface.
+4. Implement real authentication and user profiles.
+5. Build the social networking feed.
+6. Implement real-time private messaging.
+7. Implement groups, voice messages, attachments, and calls.
+8. Implement stories, notifications, and settings.
+9. Build the secure admin dashboard.
+10. Complete testing and deployment preparation.
+
+Do not stop after producing a plan, design, homepage, or prototype.
+
+Write actual code, connect actual services, fix errors, and verify real user workflows.
+
+At the end of each phase, report:
+
+- What was implemented.
+- What was tested.
+- What passed.
+- What failed.
+- What requires additional configuration.
+- What remains incomplete.
+
+Use only these final statuses:
+
+- **PASS:** Implemented and successfully tested.
+- **IMPLEMENTED — NOT VERIFIED:** Code exists but full testing remains.
+- **BLOCKED:** Requires an external service, credential, or infrastructure.
+- **NOT IMPLEMENTED:** Not yet developed.
+
+Never claim that the complete platform is production-ready unless its critical functionality, security, and deployment requirements have actually been verified.
+
+**START NOW: Inspect the existing Google AI Studio project and begin building the actual application, starting with the project foundation, premium responsive UI, Firebase integration, authentication, database architecture, and persistent user profiles.**

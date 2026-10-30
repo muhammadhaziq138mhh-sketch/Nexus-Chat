@@ -1,0 +1,287 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User public and profile details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 80 },
+        "username": { "type": "string", "maxLength": 40, "pattern": "^[a-zA-Z0-9_.]+$" },
+        "email": { "type": "string", "maxLength": 120 },
+        "photoURL": { "type": "string", "maxLength": 2048 },
+        "bio": { "type": "string", "maxLength": 500 },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "followersCount": { "type": "number" },
+        "followingCount": { "type": "number" },
+        "postsCount": { "type": "number" },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "displayName", "username", "email"]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "User private preferences and privacy settings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "whoCanMessage": { "type": "string", "enum": ["everyone", "friends", "nobody"] },
+        "whoCanSeeOnline": { "type": "string", "enum": ["everyone", "friends", "nobody"] },
+        "readReceipts": { "type": "boolean" },
+        "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+        "accentColor": { "type": "string", "maxLength": 30 },
+        "emailNotifications": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Social feed post created by a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 80 },
+        "authorUsername": { "type": "string", "maxLength": 40 },
+        "authorPhotoURL": { "type": "string", "maxLength": 2048 },
+        "content": { "type": "string", "maxLength": 5000 },
+        "mediaUrl": { "type": "string", "maxLength": 2048 },
+        "mediaType": { "type": "string", "enum": ["text", "image", "video"] },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "sharesCount": { "type": "number" },
+        "tags": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "authorId", "authorName", "content", "mediaType"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on a social post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "postId": { "type": "string", "maxLength": 128 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 80 },
+        "authorPhotoURL": { "type": "string", "maxLength": 2048 },
+        "content": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "postId", "authorId", "authorName", "content"]
+    },
+    "Reaction": {
+      "title": "Reaction",
+      "description": "Post like or emoji reaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "postId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["like", "love", "fire", "laugh"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "postId", "userId", "type"]
+    },
+    "FriendRequest": {
+      "title": "FriendRequest",
+      "description": "Friendship connection request between users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "receiverId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "senderId", "receiverId", "status"]
+    },
+    "Follower": {
+      "title": "Follower",
+      "description": "Following relation between users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "followerId": { "type": "string", "maxLength": 128 },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "followerId", "targetId"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Direct or group chat conversation room",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["direct", "group"] },
+        "participantIds": { "type": "string", "maxLength": 500 },
+        "name": { "type": "string", "maxLength": 100 },
+        "photoURL": { "type": "string", "maxLength": 2048 },
+        "description": { "type": "string", "maxLength": 500 },
+        "lastMessage": { "type": "string", "maxLength": 1000 },
+        "lastMessageTime": { "type": "string" },
+        "lastMessageSenderId": { "type": "string", "maxLength": 128 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "type", "participantIds"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Real-time chat message with support for voice, text, attachments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "senderName": { "type": "string", "maxLength": 80 },
+        "senderPhotoURL": { "type": "string", "maxLength": 2048 },
+        "text": { "type": "string", "maxLength": 4000 },
+        "mediaUrl": { "type": "string", "maxLength": 2048 },
+        "mediaType": { "type": "string", "enum": ["text", "image", "video", "audio", "file"] },
+        "audioDuration": { "type": "number" },
+        "fileName": { "type": "string", "maxLength": 255 },
+        "fileSize": { "type": "number" },
+        "status": { "type": "string", "enum": ["sent", "delivered", "read"] },
+        "deletedForEveryone": { "type": "boolean" },
+        "replyToMessageId": { "type": "string", "maxLength": 128 },
+        "replyToContent": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "conversationId", "senderId", "mediaType"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "24-hour status story update",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 80 },
+        "authorPhotoURL": { "type": "string", "maxLength": 2048 },
+        "mediaUrl": { "type": "string", "maxLength": 2048 },
+        "mediaType": { "type": "string", "enum": ["text", "image"] },
+        "caption": { "type": "string", "maxLength": 500 },
+        "expiresAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "authorId", "authorName", "mediaUrl", "mediaType", "expiresAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User notification for alerts, likes, comments, calls",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "recipientId": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "senderName": { "type": "string", "maxLength": 80 },
+        "senderPhotoURL": { "type": "string", "maxLength": 2048 },
+        "type": { "type": "string", "enum": ["message", "friend_request", "friend_accept", "like", "comment", "mention", "call", "admin"] },
+        "entityId": { "type": "string", "maxLength": 128 },
+        "message": { "type": "string", "maxLength": 300 },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "recipientId", "type", "message"]
+    },
+    "Call": {
+      "title": "Call",
+      "description": "WebRTC audio/video call signaling session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "callerId": { "type": "string", "maxLength": 128 },
+        "callerName": { "type": "string", "maxLength": 80 },
+        "callerPhotoURL": { "type": "string", "maxLength": 2048 },
+        "receiverId": { "type": "string", "maxLength": 128 },
+        "receiverName": { "type": "string", "maxLength": 80 },
+        "receiverPhotoURL": { "type": "string", "maxLength": 2048 },
+        "type": { "type": "string", "enum": ["audio", "video"] },
+        "status": { "type": "string", "enum": ["calling", "ongoing", "ended", "declined", "missed"] },
+        "offer": { "type": "string", "maxLength": 10000 },
+        "answer": { "type": "string", "maxLength": 10000 },
+        "createdAt": { "type": "string" },
+        "endedAt": { "type": "string" }
+      },
+      "required": ["id", "callerId", "callerName", "receiverId", "type", "status"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "User content violation moderation report",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "reporterId": { "type": "string", "maxLength": 128 },
+        "targetType": { "type": "string", "enum": ["post", "user", "message"] },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "reason": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["pending", "resolved", "dismissed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "reporterId", "targetType", "targetId", "reason", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User public profiles indexed by user uid"
+    },
+    "/userSettings/{userId}": {
+      "schema": { "$ref": "#/entities/UserSettings" },
+      "description": "User private preferences"
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/Post" },
+      "description": "Feed posts"
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" },
+      "description": "Comments on post"
+    },
+    "/posts/{postId}/reactions/{reactionId}": {
+      "schema": { "$ref": "#/entities/Reaction" },
+      "description": "Post reactions"
+    },
+    "/friendRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/FriendRequest" },
+      "description": "Friend connection requests"
+    },
+    "/followers/{followerId}": {
+      "schema": { "$ref": "#/entities/Follower" },
+      "description": "Follower records"
+    },
+    "/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Direct and group conversation threads"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/Message" },
+      "description": "Messages inside conversation thread"
+    },
+    "/stories/{storyId}": {
+      "schema": { "$ref": "#/entities/Story" },
+      "description": "24-hour social stories"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "User notifications"
+    },
+    "/calls/{callId}": {
+      "schema": { "$ref": "#/entities/Call" },
+      "description": "WebRTC call signaling state"
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/Report" },
+      "description": "Moderation reports submitted to admin"
+    }
+  }
+}

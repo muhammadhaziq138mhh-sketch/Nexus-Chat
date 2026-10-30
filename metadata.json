@@ -1,0 +1,6 @@
+{
+  "name": "Nexus - Social & Real-Time Messaging Platform",
+  "description": "A premium social networking and real-time messaging ecosystem featuring live feed, audio/video calling, voice messaging, stories, and community groups.",
+  "requestFramePermissions": ["camera", "microphone", "display-capture"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

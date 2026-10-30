@@ -1,0 +1,179 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'muhammadhaziq138mhh@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Users Collection (Public profiles viewable by visitors, editable only by owner/admin)
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if isOwner(userId) 
+        && request.resource.data.uid == userId
+        && (!('role' in request.resource.data) || request.resource.data.role != 'admin' || isAdmin());
+      allow update: if (isOwner(userId) 
+        && request.resource.data.uid == userId
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']) || isAdmin()))
+        || isAdmin();
+      allow delete: if isAdmin() || isOwner(userId);
+    }
+
+    // User Settings (Strictly private to owner or admin)
+    match /userSettings/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // Admins Collection
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Posts Collection (Publicly readable feed, protected mutations)
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if isSignedIn() 
+        && request.resource.data.authorId == request.auth.uid;
+      allow update: if isSignedIn() && (
+        (resource.data.authorId == request.auth.uid) ||
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount', 'commentsCount', 'sharesCount'])) ||
+        isAdmin()
+      );
+      allow delete: if isSignedIn() && (
+        resource.data.authorId == request.auth.uid || isAdmin()
+      );
+
+      // Comments subcollection
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+        allow update, delete: if isSignedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+      }
+
+      // Reactions subcollection
+      match /reactions/{reactionId} {
+        allow read: if true;
+        allow create, update: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+        allow delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      }
+    }
+
+    // Friend Requests (Strictly participants or admin)
+    match /friendRequests/{requestId} {
+      allow read: if isSignedIn() && (
+        resource.data.senderId == request.auth.uid || 
+        resource.data.receiverId == request.auth.uid || 
+        isAdmin()
+      );
+      allow create: if isSignedIn() && request.resource.data.senderId == request.auth.uid;
+      allow update: if isSignedIn() && (
+        resource.data.receiverId == request.auth.uid || 
+        resource.data.senderId == request.auth.uid || 
+        isAdmin()
+      );
+      allow delete: if isSignedIn() && (
+        resource.data.senderId == request.auth.uid || 
+        resource.data.receiverId == request.auth.uid || 
+        isAdmin()
+      );
+    }
+
+    // Followers
+    match /followers/{followerId} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.followerId == request.auth.uid;
+      allow delete: if isSignedIn() && (resource.data.followerId == request.auth.uid || isAdmin());
+    }
+
+    // Conversations
+    match /conversations/{conversationId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn() && (resource.data.createdBy == request.auth.uid || isAdmin());
+
+      // Messages inside conversation
+      match /messages/{messageId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() && request.resource.data.senderId == request.auth.uid;
+        allow update: if isSignedIn() && (
+          (resource.data.senderId == request.auth.uid) ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'readBy']) ||
+          isAdmin()
+        );
+        allow delete: if isSignedIn() && (resource.data.senderId == request.auth.uid || isAdmin());
+      }
+    }
+
+    // Stories (24-hour status stories)
+    match /stories/{storyId} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+      allow update: if isSignedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+      allow delete: if isSignedIn() && (resource.data.authorId == request.auth.uid || isAdmin());
+    }
+
+    // Notifications (Private to designated recipient)
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn() && (resource.data.recipientId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (resource.data.recipientId == request.auth.uid || isAdmin());
+      allow delete: if isSignedIn() && (resource.data.recipientId == request.auth.uid || isAdmin());
+    }
+
+    // WebRTC Calls (Caller & Receiver participants only)
+    match /calls/{callId} {
+      allow read: if isSignedIn() && (
+        resource.data.callerId == request.auth.uid ||
+        resource.data.receiverId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isSignedIn() && request.resource.data.callerId == request.auth.uid;
+      allow update: if isSignedIn() && (
+        resource.data.callerId == request.auth.uid ||
+        resource.data.receiverId == request.auth.uid ||
+        isAdmin()
+      );
+      allow delete: if isSignedIn() && (
+        resource.data.callerId == request.auth.uid ||
+        resource.data.receiverId == request.auth.uid ||
+        isAdmin()
+      );
+
+      // ICE Candidates subcollection for WebRTC
+      match /candidates/{candidateId} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Reports for Moderation
+    match /reports/{reportId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.reporterId == request.auth.uid);
+      allow create: if isSignedIn() && request.resource.data.reporterId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+  }
+}
