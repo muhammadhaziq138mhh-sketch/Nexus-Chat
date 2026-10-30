@@ -143,7 +143,7 @@ export const NotificationsPage: React.FC<NotificationsPageProps> = ({
 
         {notifications.length === 0 && (
           <div className="p-12 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 text-xs">
-            No notifications yet. You're all caught up!
+            {user ? "No notifications yet. You're all caught up!" : "Sign in to see your notifications and activity alerts."}
           </div>
         )}
       </div>

@@ -132,8 +132,25 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   };
 
   if (!profile) {
+    if (!user && !viewUserId) {
+      return (
+        <div className="flex-1 max-w-md mx-auto w-full p-10 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 my-8">
+          <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto">
+            <User className="w-7 h-7" />
+          </div>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Profile Access</h2>
+          <p className="text-xs text-slate-500">Sign in to view your profile, edit your information, and manage your posts.</p>
+          <button
+            onClick={onOpenAuth}
+            className="px-6 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-600/20 transition-all active:scale-95"
+          >
+            Sign In to Nexus
+          </button>
+        </div>
+      );
+    }
     return (
-      <div className="flex-1 max-w-4xl mx-auto w-full p-8 text-center text-slate-400">
+      <div className="flex-1 max-w-4xl mx-auto w-full p-12 text-center text-slate-400">
         Loading profile...
       </div>
     );

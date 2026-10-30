@@ -3,6 +3,8 @@ export interface UserProfile {
   displayName: string;
   username: string;
   email: string;
+  phoneNumber?: string;
+  providerId?: string;
   photoURL?: string;
   bio?: string;
   role: 'user' | 'admin';

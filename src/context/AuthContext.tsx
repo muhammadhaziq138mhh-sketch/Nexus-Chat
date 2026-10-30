@@ -3,12 +3,17 @@ import {
   User, 
   signInWithPopup, 
   GoogleAuthProvider, 
+  FacebookAuthProvider,
+  OAuthProvider,
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
-  deleteUser
+  deleteUser,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  ConfirmationResult
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, db, handleFirestoreError, OperationType } from '../firebase/config';
@@ -21,8 +26,12 @@ interface AuthContextType {
   loading: boolean;
   isAdmin: boolean;
   loginWithGoogle: () => Promise<void>;
+  loginWithFacebook: () => Promise<void>;
+  loginWithApple: () => Promise<void>;
   loginWithEmail: (email: string, pass: string) => Promise<void>;
   signupWithEmail: (email: string, pass: string, name: string, username: string) => Promise<void>;
+  sendPhoneOtp: (phoneNumber: string, appVerifier: RecaptchaVerifier) => Promise<ConfirmationResult>;
+  verifyPhoneOtp: (confirmationResult: ConfirmationResult, otp: string) => Promise<void>;
   sendPasswordReset: (email: string) => Promise<void>;
   logout: () => Promise<void>;
   updateProfileData: (data: Partial<UserProfile>) => Promise<void>;
@@ -49,14 +58,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       let currentProfile: UserProfile;
 
       if (!userSnap.exists()) {
-        const usernameBase = (firebaseUser.email?.split('@')[0] || 'user').toLowerCase().replace(/[^a-z0-9_]/g, '');
+        const usernameBase = (
+          firebaseUser.email?.split('@')[0] ||
+          (firebaseUser.phoneNumber ? 'user_' + firebaseUser.phoneNumber.replace(/[^0-9]/g, '').slice(-4) : 'user')
+        ).toLowerCase().replace(/[^a-z0-9_]/g, '');
+
         const isUserAdmin = firebaseUser.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
 
         currentProfile = {
           uid: firebaseUser.uid,
-          displayName: firebaseUser.displayName || usernameBase,
+          displayName: firebaseUser.displayName || 
+            (firebaseUser.phoneNumber ? `User ${firebaseUser.phoneNumber}` : usernameBase),
           username: usernameBase + Math.floor(100 + Math.random() * 900),
-          email: firebaseUser.email || '',
+          email: firebaseUser.email || (firebaseUser.phoneNumber ? `${firebaseUser.phoneNumber.replace(/[^0-9]/g, '')}@phone.nexus` : ''),
+          phoneNumber: firebaseUser.phoneNumber || undefined,
+          providerId: firebaseUser.providerData[0]?.providerId || 'password',
           photoURL: firebaseUser.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${firebaseUser.uid}`,
           bio: 'Hey there! I am using Nexus.',
           role: isUserAdmin ? 'admin' : 'user',
@@ -142,6 +158,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await signInWithPopup(auth, provider);
   };
 
+  const loginWithFacebook = async () => {
+    const provider = new FacebookAuthProvider();
+    await signInWithPopup(auth, provider);
+  };
+
+  const loginWithApple = async () => {
+    const provider = new OAuthProvider('apple.com');
+    await signInWithPopup(auth, provider);
+  };
+
   const loginWithEmail = async (email: string, pass: string) => {
     await signInWithEmailAndPassword(auth, email, pass);
   };
@@ -155,6 +181,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       displayName: name,
       username: username.toLowerCase().trim(),
       email,
+      providerId: 'password',
       photoURL: `https://api.dicebear.com/7.x/avataaars/svg?seed=${cred.user.uid}`,
       bio: 'Hey there! I am using Nexus.',
       role: isUserAdmin ? 'admin' : 'user',
@@ -168,6 +195,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     await setDoc(doc(db, 'users', cred.user.uid), newProfile);
     setProfile(newProfile);
+  };
+
+  const sendPhoneOtp = async (phoneNumber: string, appVerifier: RecaptchaVerifier): Promise<ConfirmationResult> => {
+    return await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+  };
+
+  const verifyPhoneOtp = async (confirmationResult: ConfirmationResult, otp: string): Promise<void> => {
+    await confirmationResult.confirm(otp);
   };
 
   const sendPasswordReset = async (email: string) => {
@@ -247,8 +282,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loading,
         isAdmin,
         loginWithGoogle,
+        loginWithFacebook,
+        loginWithApple,
         loginWithEmail,
         signupWithEmail,
+        sendPhoneOtp,
+        verifyPhoneOtp,
         sendPasswordReset,
         logout,
         updateProfileData,

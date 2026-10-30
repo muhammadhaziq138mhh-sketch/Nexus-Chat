@@ -48,6 +48,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   ];
 
   const handleSavePrivacy = async () => {
+    if (!user) {
+      alert('Please sign in to save personal privacy settings.');
+      return;
+    }
     try {
       await updateSettingsData({
         whoCanMessage,

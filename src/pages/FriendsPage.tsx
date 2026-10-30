@@ -133,7 +133,7 @@ export const FriendsPage: React.FC<FriendsPageProps> = ({
 
           {requests.length === 0 && (
             <div className="p-12 text-center rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 text-xs">
-              No pending friend requests.
+              {user ? 'No pending friend requests.' : 'Sign in to view and send connection requests.'}
             </div>
           )}
         </div>

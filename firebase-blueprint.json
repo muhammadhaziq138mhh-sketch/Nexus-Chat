@@ -9,6 +9,8 @@
         "displayName": { "type": "string", "maxLength": 80 },
         "username": { "type": "string", "maxLength": 40, "pattern": "^[a-zA-Z0-9_.]+$" },
         "email": { "type": "string", "maxLength": 120 },
+        "phoneNumber": { "type": "string", "maxLength": 30 },
+        "providerId": { "type": "string", "maxLength": 50 },
         "photoURL": { "type": "string", "maxLength": 2048 },
         "bio": { "type": "string", "maxLength": 500 },
         "role": { "type": "string", "enum": ["user", "admin"] },
@@ -20,7 +22,7 @@
         "createdAt": { "type": "string" },
         "updatedAt": { "type": "string" }
       },
-      "required": ["uid", "displayName", "username", "email"]
+      "required": ["uid", "displayName", "username"]
     },
     "UserSettings": {
       "title": "UserSettings",
